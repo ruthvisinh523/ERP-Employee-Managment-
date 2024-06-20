@@ -1,0 +1,32 @@
+﻿@model ERP.BusinessEntity.RegistrestionForm
+@{
+    Layout = null;
+}
+
+<form asp-action="AddEditUser" asp-controller="User" method="post">
+
+    <label> First Name </label>
+    <input type="text" asp-for="FName" />   <br />  <br />  <br />
+
+
+    <label> Email </label>
+    <input type="Email" asp-for="Email" /><br />  <br />  <br />
+
+    <label>  Password</label>
+    <input type="Password" asp-for="Password" /> <br />  <br />  <br />
+
+    <label>  Password</label>
+    <input type="Password" asp-for="CounfirmPassword" /><br />  <br />  <br />
+
+    <label> PhoneNumber </label>
+    <input type="PhoneNumber" asp-for="Mobile" /><br />  <br />  <br />
+
+    <label> Dob </label>
+    <input type="datetime" asp-for="Dob" /><br />  <br />  <br />
+
+    <label> Gender</label>
+    <input type="text" asp-for="Gender" /><br />  <br />  <br />
+
+    <input type="submit" value="submit" /><br />  <br />  <br />
+ 
+</form>

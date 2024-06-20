@@ -1,0 +1,16 @@
+﻿
+@model LoginUserView
+
+<form asp-action="LoginUser" asp-controller="Login" method="post">
+
+    <label> EmailId</label>
+    <input type="email" asp-for="Email" />
+
+
+    <label> Password</label>
+    <input type="password" asp-for="Password" />
+
+
+    <input type="submit" value="Login" />
+
+</form>

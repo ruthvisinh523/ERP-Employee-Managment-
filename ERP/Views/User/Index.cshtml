@@ -1,0 +1,86 @@
+﻿<table id="user" border="1">
+    <thead>
+
+        <tr>
+            <th>Fname</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+
+
+    </thead>
+
+</table>
+
+@section Scripts {
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            dataTable = $("#user").DataTable({
+                "ajax": {
+                    "url": "/User/GoData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "fname" },
+                    { "data": "email" },
+                    {
+                        "data": "userId", "render": function (data) {
+                            return "<a class='btn btn-primary btn-sm' onclick=showInPopup('@Url.Action("AddEditBatch", "CityMaster")/" + data + "',true)><i class='fa fa-pencil'></i> Edit</a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=deleteInfo(" + data + ")><i class='fa fa-trash'></i> Delete</a>";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px"
+                    }
+                ]
+            })
+        })
+
+        const deleteInfo = (id) => {
+
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this record!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                showCancelButton: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("DeleteUser", "User")/' + id,
+                        success: function (data) {
+                            if (data.result) {
+                                dataTable.ajax.reload();
+
+                                swal(data.message, {
+                                    icon: "success",
+                                });
+                            }
+
+                            else {
+
+                                swal("Error");
+                            }
+                        }
+
+                    });
+
+
+
+                }
+            });
+
+
+
+
+
+        }
+    </script>
+}
